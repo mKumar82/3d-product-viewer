@@ -1,0 +1,22 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  display: flex;
+}
+
+.panel {
+  width: 250px;
+  padding: 15px;
+  background: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button {
+  padding: 8px;
+  cursor: pointer;
+}
