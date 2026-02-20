@@ -7,6 +7,7 @@ import settingsRoutes from "./routes/settingsRoutes.js";
 import { errorHandler } from "./middleware/errorMiddleware.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import fs from "fs";
 
 dotenv.config();
 connectDB();
@@ -14,15 +15,23 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin:"*"
-}));
+app.use(
+  cors({
+    origin: "*",
+  }),
+);
 app.use(express.json());
 
 // Static folder for uploaded models
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+export const uploadPath = path.join(__dirname, "uploads");
+
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath, { recursive: true });
+}
+app.use("/uploads", express.static(uploadPath));
 
 // Routes
 app.use("/api/upload", uploadRoutes);
