@@ -1,13 +1,9 @@
 import multer from "multer";
 import path from "path";
-import { fileURLToPath } from "url";
 import fs from "fs";
 
 // Static folder for uploaded models
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export const uploadPath = path.join(__dirname, "uploads");
+const uploadPath = path.join(process.cwd(), "uploads");
 
 if (!fs.existsSync(uploadPath)) {
   fs.mkdirSync(uploadPath, { recursive: true });
